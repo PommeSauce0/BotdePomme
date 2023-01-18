@@ -16,8 +16,6 @@ class BotdePomme(commands.Bot):
         intents = discord.Intents.default()
         intents.message_content = True
         intents.messages = True
-        intents.dm_messages = True
-        intents.reactions = True
 
         super().__init__(command_prefix="!", intents=intents)
 
