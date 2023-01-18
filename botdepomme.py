@@ -1,50 +1,60 @@
+import asyncio
 import os
 import discord
-import youtube_dl
+from discord.ext import commands
 from dotenv import load_dotenv
-from datetime import datetime
-import random
-from datetime import datetime
-from asyncio import sleep
-import asyncio
 
-load_dotenv(dotenv_path="config")
-default_intents = discord.Intents.default()
-default_intents.members = True
-default_intents.guilds = True
+load_dotenv(dotenv_path="config/config")
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-client = discord.Client(intents=default_intents)
 
-@client.event
-async def on_ready():
-    print('Connecté en tant que {0.user} '.format(client) + str(datetime.now()))
-    
-    
-async def status_task():
-    await client.wait_until_ready()
+class BotdePomme(commands.Bot):
+    def __init__(self):
+        # Intents
+        intents = discord.Intents.default()
+        intents.message_content = True
+        intents.messages = True
+        intents.dm_messages = True
+        intents.reactions = True
 
-    music = []
-    film = ['Re:Zero']
-    stream = []
-    game = ['Minecraft', 'League of Legends', 'Epic Seven']
-    
-    while True:
-        games = random.choice(game)
-        streams = random.choice(stream)
-        films = random.choice(film)
-        musics = random.choice(music)
-        activity = [await client.change_presence(activity=discord.Streaming(name='Un bon streameur', url=streams)),
-                    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=musics)),
-                    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=films)),
-                    await client.change_presence(activity=discord.Game(name=games))]
-        random.choice(activity)
-        await asyncio.sleep(120)
+        super().__init__(command_prefix="!", intents=intents)
 
-@client.event
-async def on_member_join(member):
-    channel = member.guild.system_channel
-    await channel.send(content=f"Welcome {member.display_name} !")
-        
-client.loop.create_task(status_task())
-client.run(os.getenv("token"))
+    async def on_ready(self):
+        prefix = '"!"'
+        print('Logged in as {0.user} with the prefix '.format(self) + f'{prefix}\t' + str(datetime.now()))
 
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.channel.send(f"Error: Missing Required Argument // {error}")
+            print("Error: MissingRequiredArgument")
+        elif isinstance(error, commands.BadArgument):
+            await ctx.channel.send(f"Error: Bad Argument // {error}")
+            print("Error: Bad Argument")
+        elif isinstance(error, commands.MissingPermissions):
+            await ctx.channel.send(f"Error: Missing Permissions // {error}")
+            print("Error: Missing Permissions")
+        elif isinstance(error, commands.ChannelNotReadable):
+            await ctx.channel.send(f'Error: Channel Not Readable // {error}')
+            print("Error: Channel Not Readable")
+        else:
+            print(f"Error: Unknown // {error}")
+
+
+async def load(bot: commands.Bot):
+    for filename in os.listdir('./commands'):
+        if filename.endswith('.py'):
+            await bot.load_extension(f'commands.{filename[:-3]}')
+
+
+async def main(bot: commands.Bot, token):
+    async with bot:
+        await load(bot)
+        await bot.start(token)
+
+
+token = os.getenv("token")
+
+if __name__ == "__main__":
+    asyncio.run(main(BotdePomme(), token))
