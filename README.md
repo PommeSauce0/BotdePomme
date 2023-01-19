@@ -25,7 +25,7 @@ Voici la liste des commandes disponibles pour ce bot :
 <br>
 
 ## Installation  
-1. Créer votre bot sur le portail dev de Discord (lien [ici](##Liens))  
+1. Créer votre bot sur le portail dev de Discord ([ici](https://discord.com/developers/docs/intro))  
 2. Installer les requirements (`pip install -r requirements.txt`)(**Ne tapez jamais une commande sans en comprendre les conséquences potentielles, cela pourrait être dangereux.**)  
 3. Remplacer "your token here" par votre token de bot (dans le fichier config qui est lui même dans le dossier config)  
 4. Executer `botdepomme.py`  
