@@ -2,6 +2,7 @@ import asyncio
 import os
 import discord
 from discord.ext import commands
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path="config/config")
@@ -16,8 +17,6 @@ class BotdePomme(commands.Bot):
         intents = discord.Intents.default()
         intents.message_content = True
         intents.messages = True
-        intents.dm_messages = True
-        intents.reactions = True
 
         super().__init__(command_prefix="!", intents=intents)
 
