@@ -38,7 +38,7 @@ Voici la liste des commandes disponibles pour ce bot :
 Lien vers Discord developer portal : https://discord.com/developers/docs/intro *(n'hésitez pas à vous renseigner sur internet pour créer votre bot)*  
 <br>
 
-#### Informations supplémentaires
+### Informations supplémentaires
 - Ce bot est encore en développement et de nouvelles fonctionnalités seront peut-être ajoutées.  
 - Ce bot n'est pas capable de lire de playlist (il ne va pas crash, mais il ne fera plus rien si vous lui faites la demande d'une playlist)  
 - Ce bot est un peu capricieux, en cas de soucis un redemarrage et tout repart (il lui arrive de ne pas se lancer lors de la première commande, ça reste rare mais vous êtes avertis :) )
