@@ -36,7 +36,7 @@ Voici la liste des commandes disponibles pour ce bot :
 
 ## Liens
 Lien vers Discord developer portal : https://discord.com/developers/docs/intro *(n'hésitez pas à vous renseigner sur internet pour créer votre bot)*  
-<br>
+<br>  
 
 ## Informations supplémentaires
 - Ce bot est encore en développement et de nouvelles fonctionnalités seront peut-être ajoutées.  
