@@ -14,11 +14,8 @@ class Games(commands.Cog):
     # Jeu du pendu
     @commands.command(name='pendu', help='Jouer au pendu')
     async def pendu(self, ctx):
-        # Liste de mots pour le pendu
-        # mots = ['chat', 'chien', 'voiture', 'ordinateur', 'maison']
         liste_mot = open("./config/liste_pendu.txt", "r")
         mots = liste_mot.read().split(',')
-        # print(mots)
         mot_a_deviner = random.choice(mots)
         lettres_trouvees = []
         nombre_de_coups = 0
